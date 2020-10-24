@@ -11,13 +11,21 @@ $VeryLightGray: hsl(0, 0%, 98%);
     src: url("../Alliance.ttf") format("truetype");
 }
 
+@mixin  transition-ease {
+    transition: all 0.5s ease-in-out;
+}
+
 html{
     font-size: 1rem;
     
     body{
         font-family: 'Karla', sans-serif;
         width: 100%;
-        overflow-x: hidden;    
+        overflow-x: hidden;
+        
+        .mobile{
+            display: none;
+        }
         
         button{
             border: 1px solid white;
@@ -56,6 +64,7 @@ html{
                     height: 2px;
                     background: $VeryDarkViolet;
                     position: relative;
+                    @include transition-ease();
                     &::before{
                         content: '';
                         position: absolute;
@@ -63,6 +72,7 @@ html{
                         width: 16px;
                         height: 2px;
                         background: $VeryDarkViolet;
+                        @include transition-ease();
                     }
                     &::after{
                         content: '';
@@ -71,6 +81,18 @@ html{
                         width: 16px;
                         height: 2px;
                         background: $VeryDarkViolet;
+                        @include transition-ease();
+                    }
+                    &.open{
+                        transform: rotate(720deg);
+                        background: transparent;
+
+                        &::before{
+                            transform: rotate(45deg) translate(4px, 3px);
+                        }
+                        &::after{
+                            transform: rotate(-45deg) translate(4px,-3px);
+                        }
                     }
                 }
             }
@@ -113,14 +135,14 @@ html{
         .intro-container{
             position: relative;
             height: 100vh;
-            width: 100vw;
+            width: 100vw !important;
             .intro{
                 min-height: 70vh;
-                width: 100%;
+                width: 100vw !important;
                 background-color: $DarkViolet;
                 display: flex;
                 justify-content: space-between; 
-                padding: 15px 8%;
+                padding: 50px 8%;
                 color: white;
                 position: relative;
                 &-text{
@@ -147,9 +169,7 @@ html{
                 &-image{
                     flex-basis: 40%;
                     align-self: flex-start;
-                    margin-right: 5%;
-                    margin-bottom: -5%;
-                    margin: 5% 5% -20% 5%;
+                    margin: 5% auto -20%;
                     img{
                         width: 100%;
                     }
@@ -273,6 +293,183 @@ html{
                     color: $DarkViolet;
                     &:hover{                        
                         color: $GrayishBlue;
+                    }
+                }
+            }
+        }
+
+        @media screen and (max-width: 50rem) {
+
+            .desktop{
+                display: none;
+            }
+
+            .mobile{
+                display: inline;
+            }
+
+            .header{
+                height: 50px;
+                .mobile{
+                    visibility: visible;
+                }
+                .nav{
+                    opacity: 0;
+                    display: block;
+                    position: fixed;
+                    top: 50px;
+                    left: 0;
+                    width: 100vw;
+                    height: calc(100vh - 50px);
+                    color: white;
+                    background: $VeryDarkViolet url("../images/bg-pattern-mobile-nav.svg");
+                    background-position: bottom;
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    z-index: 1;
+                    padding: 1rem;
+                    transform: translateY(calc(-100% - 50px));
+                    @include transition-ease;
+                    ul{
+                        flex-direction: column;
+                        margin-top: 1rem;
+                        font-size: 1.5rem;
+                        li{
+                            margin-top: 2rem;
+                            font-family: 'Karla', sans-serif;
+                            transition: all 0.25s ease-in-out;
+                            a{
+                                color: white;
+                                padding: .5rem;
+                            }
+                            &:last-child{
+                                border: 1px solid white;
+                                width: 80%;
+                                text-align: center;
+                                a{                        
+                                    color: white;
+                                }
+                            }
+                            &:hover{
+                                transform: scale(1.1);                                
+                                a{
+                                    color: white;
+                                }
+                            }
+                        }
+                    }
+                    &.open{
+                        transform: translateY(0px);
+                        opacity: 1;
+                    }
+                }
+            }
+
+            .intro-container{
+                height: initial;
+                .intro{
+                    flex-direction: column-reverse;
+                    padding: 0;
+                    &-image{
+                        flex-basis: 100%;
+                        width: 100%;
+                        margin: 0;
+                    }
+                    &-text{
+                        flex-basis: 100%;
+                        width: 100%;
+                        padding: 50px 10%;
+                        transform: translateX(-3%);
+                        text-align: center;
+                        background: $DarkViolet url("../images/bg-pattern-intro-left-mobile.svg");
+                        background-position: left top;
+                        background-repeat: no-repeat;
+                        background-size: 50%;
+                        position: relative;
+                        h1{
+                            font-size: 2.3rem;
+                            line-height: 2.3rem;
+                            font-weight: 400;
+                        }
+                        #bottom-right{
+                            position: absolute;
+                            bottom: 0;
+                            right: 0;
+                            transform: translate(-8px, 50%);
+                            width: 30%;
+                        }
+                    }
+                    
+                }                
+            }
+
+            .difference{
+                text-align: center;
+                padding: 50px 5%;
+                hr{
+                    width: 40%;
+                    margin: 0 auto;
+                }
+                h1{
+                    font-size: 2rem;
+                }
+                .features{
+                    flex-direction: column;
+                    margin-bottom: 5rem;
+                    .feature{
+                        margin-top: 3rem;
+                    }
+                }
+                .work{
+                    flex-direction: column;
+                    background: $DarkViolet url("../images/bg-pattern-how-we-work-mobile.svg");
+                    background-position: right top;
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    justify-content: center;
+                    padding: 60px 20px;
+                    h2{
+                        font-size: 2rem;
+                        line-height: 2.2rem;
+                        margin-bottom: 2rem;
+                    }
+                }
+            }
+            
+            footer{
+                background: $VeryLightGray url('../images/bg-pattern-footer-desktop.svg');
+                background-repeat: no-repeat;
+                background-position: top;
+                background-size: contain;
+                .social-links{
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    margin-bottom: 2rem;
+                    .logo{
+                        margin: 2rem auto;
+                    }
+                }
+                hr{
+                    width: 100%;
+                    margin: 0 auto;
+                    background: $GrayishBlue;
+                }
+                .other-links{
+                    flex-direction: column;
+                    align-self: center;
+                    justify-content: space-between;
+                    text-align: center;
+                    .link-group{
+                        .head-link{
+                            margin: 1.5rem 30% .6rem;
+                            text-align: center;
+                        }
+                        a{
+                            margin: .1rem 30%;
+                            text-align: center;
+                            line-height: .5rem;
+                        }
                     }
                 }
             }

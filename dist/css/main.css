@@ -28,6 +28,10 @@ html body {
   overflow-x: hidden;
 }
 
+html body .mobile {
+  display: none;
+}
+
 html body button {
   border: 1px solid white;
   padding: .5rem;
@@ -81,6 +85,8 @@ html body .header .toggle-btn {
   height: 2px;
   background: #2b272f;
   position: relative;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 html body .header .toggle-btn::before {
@@ -90,6 +96,8 @@ html body .header .toggle-btn::before {
   width: 16px;
   height: 2px;
   background: #2b272f;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 html body .header .toggle-btn::after {
@@ -99,6 +107,24 @@ html body .header .toggle-btn::after {
   width: 16px;
   height: 2px;
   background: #2b272f;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+
+html body .header .toggle-btn.open {
+  -webkit-transform: rotate(720deg);
+          transform: rotate(720deg);
+  background: transparent;
+}
+
+html body .header .toggle-btn.open::before {
+  -webkit-transform: rotate(45deg) translate(4px, 3px);
+          transform: rotate(45deg) translate(4px, 3px);
+}
+
+html body .header .toggle-btn.open::after {
+  -webkit-transform: rotate(-45deg) translate(4px, -3px);
+          transform: rotate(-45deg) translate(4px, -3px);
 }
 
 html body .header .nav ul {
@@ -146,12 +172,12 @@ html body .header .nav ul li:hover a {
 html body .intro-container {
   position: relative;
   height: 100vh;
-  width: 100vw;
+  width: 100vw !important;
 }
 
 html body .intro-container .intro {
   min-height: 70vh;
-  width: 100%;
+  width: 100vw !important;
   background-color: #2d2640;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -159,7 +185,7 @@ html body .intro-container .intro {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  padding: 15px 8%;
+  padding: 50px 8%;
   color: white;
   position: relative;
 }
@@ -197,9 +223,7 @@ html body .intro-container .intro-image {
       flex-basis: 40%;
   -ms-flex-item-align: start;
       align-self: flex-start;
-  margin-right: 5%;
-  margin-bottom: -5%;
-  margin: 5% 5% -20% 5%;
+  margin: 5% auto -20%;
 }
 
 html body .intro-container .intro-image img {
@@ -358,5 +382,210 @@ html body footer .attribution #BlessTheBoy {
 
 html body footer .attribution #BlessTheBoy:hover {
   color: #95a9c6;
+}
+
+@media screen and (max-width: 50rem) {
+  html body .desktop {
+    display: none;
+  }
+  html body .mobile {
+    display: inline;
+  }
+  html body .header {
+    height: 50px;
+  }
+  html body .header .mobile {
+    visibility: visible;
+  }
+  html body .header .nav {
+    opacity: 0;
+    display: block;
+    position: fixed;
+    top: 50px;
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - 50px);
+    color: white;
+    background: #2b272f url("../images/bg-pattern-mobile-nav.svg");
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: contain;
+    z-index: 1;
+    padding: 1rem;
+    -webkit-transform: translateY(calc(-100% - 50px));
+            transform: translateY(calc(-100% - 50px));
+    -webkit-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+  }
+  html body .header .nav ul {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    margin-top: 1rem;
+    font-size: 1.5rem;
+  }
+  html body .header .nav ul li {
+    margin-top: 2rem;
+    font-family: 'Karla', sans-serif;
+    -webkit-transition: all 0.25s ease-in-out;
+    transition: all 0.25s ease-in-out;
+  }
+  html body .header .nav ul li a {
+    color: white;
+    padding: .5rem;
+  }
+  html body .header .nav ul li:last-child {
+    border: 1px solid white;
+    width: 80%;
+    text-align: center;
+  }
+  html body .header .nav ul li:last-child a {
+    color: white;
+  }
+  html body .header .nav ul li:hover {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+  html body .header .nav ul li:hover a {
+    color: white;
+  }
+  html body .header .nav.open {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+    opacity: 1;
+  }
+  html body .intro-container {
+    height: initial;
+  }
+  html body .intro-container .intro {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: column-reverse;
+            flex-direction: column-reverse;
+    padding: 0;
+  }
+  html body .intro-container .intro-image {
+    -ms-flex-preferred-size: 100%;
+        flex-basis: 100%;
+    width: 100%;
+    margin: 0;
+  }
+  html body .intro-container .intro-text {
+    -ms-flex-preferred-size: 100%;
+        flex-basis: 100%;
+    width: 100%;
+    padding: 50px 10%;
+    -webkit-transform: translateX(-3%);
+            transform: translateX(-3%);
+    text-align: center;
+    background: #2d2640 url("../images/bg-pattern-intro-left-mobile.svg");
+    background-position: left top;
+    background-repeat: no-repeat;
+    background-size: 50%;
+    position: relative;
+  }
+  html body .intro-container .intro-text h1 {
+    font-size: 2.3rem;
+    line-height: 2.3rem;
+    font-weight: 400;
+  }
+  html body .intro-container .intro-text #bottom-right {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    -webkit-transform: translate(-8px, 50%);
+            transform: translate(-8px, 50%);
+    width: 30%;
+  }
+  html body .difference {
+    text-align: center;
+    padding: 50px 5%;
+  }
+  html body .difference hr {
+    width: 40%;
+    margin: 0 auto;
+  }
+  html body .difference h1 {
+    font-size: 2rem;
+  }
+  html body .difference .features {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    margin-bottom: 5rem;
+  }
+  html body .difference .features .feature {
+    margin-top: 3rem;
+  }
+  html body .difference .work {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    background: #2d2640 url("../images/bg-pattern-how-we-work-mobile.svg");
+    background-position: right top;
+    background-repeat: no-repeat;
+    background-size: contain;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    padding: 60px 20px;
+  }
+  html body .difference .work h2 {
+    font-size: 2rem;
+    line-height: 2.2rem;
+    margin-bottom: 2rem;
+  }
+  html body footer {
+    background: #fafafa url("../images/bg-pattern-footer-desktop.svg");
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: contain;
+  }
+  html body footer .social-links {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    margin-bottom: 2rem;
+  }
+  html body footer .social-links .logo {
+    margin: 2rem auto;
+  }
+  html body footer hr {
+    width: 100%;
+    margin: 0 auto;
+    background: #95a9c6;
+  }
+  html body footer .other-links {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    text-align: center;
+  }
+  html body footer .other-links .link-group .head-link {
+    margin: 1.5rem 30% .6rem;
+    text-align: center;
+  }
+  html body footer .other-links .link-group a {
+    margin: .1rem 30%;
+    text-align: center;
+    line-height: .5rem;
+  }
 }
 /*# sourceMappingURL=main.css.map */
